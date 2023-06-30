@@ -12,9 +12,9 @@ export AWS_S3_ENDPOINT_URL=https://gateway.storjshare.io
 
 for target in goofys geesefs rclone s3backer s3fs s3ql # objectivefs juicefs
 do
-    echo *******************************
-    echo * $target
-    echo *******************************
+    echo -------------------------------
+    echo ---- $target
+    echo -------------------------------
 
     export TARGET=$target
     export OUTPUT_FILE=$target.txt
