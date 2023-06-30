@@ -1,9 +1,11 @@
 aws configure set default.s3.max_concurrent_requests 10
 if [[ -z "${AWS_ACCESS_KEY_ID}" ]]; then
-  exit 1
+    echo missing export AWS_ACCESS_KEY_ID
+    exit 1
 fi
 if [[ -z "${AWS_SECRET_ACCESS_KEY}" ]]; then
-  exit 1
+    echo missing export AWS_SECRET_ACCESS_KEY
+    exit 1
 fi
 export AWS_DEFAULT_REGION_REGION=us-east-1
 export AWS_S3_ENDPOINT_URL=https://gateway.storjshare.io
