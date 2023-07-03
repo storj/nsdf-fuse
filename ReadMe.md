@@ -11,6 +11,12 @@ Nevertheless we investigate here how Object Storage as a FUSE file system behave
 ![image.png](images/nsdf-fuse.png)  
 _NSDF-FUSE, a testbed for evaluating settings and performance of FUSE-based file systems on top of S3-compatible object storage._
 
+## Storj fork changes
+
+This software is a fork of [nsdf-fabric/nsdf-fuse](https://github.com/nsdf-fabric/nsdf-fuse).
+
+Primarily we've added the file `run-all.sh` which loops though all `.creds` files, and runs the tests for each set of provided credentials.  The `examples.creds` files shows the expected format of credentials, and the `.gitignore` has been updated to prevent accidentally persisting these files.
+
 ## FUSE software solutions
 
 Specific instructions for specific vendors are contained inside `scripts/` directory.
