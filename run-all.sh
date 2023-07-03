@@ -22,5 +22,8 @@ do
     ./nsdf-fuse clean-all
     ./nsdf-fuse create-bucket
     ./nsdf-fuse simple-benchmark
+    ./nsdf-fuse clean-all
+    ./nsdf-fuse uninstall
+    ./nsdf-fuse update-os
 done
 
