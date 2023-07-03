@@ -1,0 +1,7 @@
+# Create a credentials file for for each service you'd like to test,
+# supplying a valid access key, secret key, region, and endpoint.
+
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export AWS_DEFAULT_REGION_REGION=us-east-1
+export AWS_S3_ENDPOINT_URL=https://gateway.storjshare.io
