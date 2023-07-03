@@ -9,6 +9,7 @@ PATH=$PATH:$(pwd)
 for target in $targets
 do
     # install the provider
+    TARGET=$target
     nsdf-fuse install
     nsdf-fuse up
 
@@ -31,9 +32,7 @@ do
         echo ---- $service - $target 
         echo ---------------------------------------------------
 
-        export TARGET=$target
-        export OUTPUT_FILE=$now-$service-$target.txt
-
+        OUTPUT_FILE=$now-$service-$target.txt
         nsdf-fuse clean-all
         nsdf-fuse create-bucket
         nsdf-fuse simple-benchmark
