@@ -2,7 +2,7 @@ set -euo pipefail
 
 aws configure set default.s3.max_concurrent_requests 10
 now=$( date '+%F_%H:%M:%S' )
-targets=goofys geesefs rclone s3backer s3fs s3ql # objectivefs juicefs
+targets="goofys geesefs rclone s3backer s3fs s3ql" # objectivefs juicefs
 PATH=$PATH:$(pwd)
 
 # loop through the different fuse providers
