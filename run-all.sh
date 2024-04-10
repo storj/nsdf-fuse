@@ -1,4 +1,4 @@
-set -Eueo pipefail
+#set -Eueo pipefail
 set -o errtrace # inherits trap on ERR in function and subshell
 
 trap 'traperror $? $LINENO $BASH_LINENO "$BASH_COMMAND" $(printf "::%s" ${FUNCNAME[@]:-})' ERR
@@ -31,13 +31,13 @@ function traperror () {
 
 aws configure set default.s3.max_concurrent_requests 10
 now=$( date '+%F_%H:%M:%S' )
-PATH=$PATH:$(pwd)
+export PATH=$PATH:$(pwd)
 
 # loop through the different fuse providers
 for target in goofys geesefs s3ql rclone s3backer s3fs
 do
     # install the provider
-    TARGET=$target
+    export TARGET=$target
 
     nsdf-fuse install
     nsdf-fuse up
@@ -45,7 +45,7 @@ do
     # loop through the different services with the current fuse provider
     for service in *.creds; do
 
-        OUTPUT_FILE=$now-$service-$target.txt
+        export OUTPUT_FILE=$now-$service-$target.txt
 
         echo ---------------------------------------------------
         echo ---------------------------------------------------
