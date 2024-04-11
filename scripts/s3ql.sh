@@ -17,14 +17,14 @@ function Install_s3ql() {
 	sudo pip3 install --upgrade pip
 	sudo pip3 install --upgrade pyfuse3 google-auth-oauthlib dugong apsw defusedxml trio
 
-	wget https://github.com/s3ql/s3ql/releases/download/release-3.8.1/s3ql-3.8.1.tar.gz
+	wget https://github.com/s3ql/s3ql/releases/download/s3ql-5.1.3/s3ql-5.1.3.tar.gz
 
-	tar xzf s3ql-3.8.1.tar.gz
+	tar xzf s3ql-5.1.3.tar.gz
 	pushd s3ql-3.8.1
 	python3 setup.py build_ext --inplace
 	sudo python3 setup.py install 
 	popd
-	sudo rm -Rf s3ql-3.8.1.tar.gz s3ql-3.8.1
+	sudo rm -Rf s3ql-5.1.3.tar.gz s3ql-5.1.3
 
 	# check the version
 	mount.s3ql --version	
@@ -50,7 +50,8 @@ function CreateBucket() {
 	# start must be s3c (i.e. s3 compatible)
 	# rath.org/s3ql-ocs/backends.html
 	# NOTE: not sure if I need to add the 443 port
-	__endpoint__=${AWS_S3_ENDPOINT_URL//https/s3c}/${BUCKET_NAME}
+	__endpoint__=${AWS_S3_ENDPOINT_URL//https\//:s3}
+	__endpoint__=${__endpoint__//http\//:s3c}/${BUCKET_NAME}
 	
 	# credentials
 	mkdir -p ${HOME}/.s3ql/
@@ -79,7 +80,8 @@ function FuseUp() {
     sync && DropCache
     mkdir -p ${TEST_DIR}
 
-	__endpoint__=${AWS_S3_ENDPOINT_URL//https/s3c}/${BUCKET_NAME}
+	__endpoint__=${AWS_S3_ENDPOINT_URL//https\//:s3}
+	__endpoint__=${__endpoint__//http\//:s3c}/${BUCKET_NAME}
 
 	 # --cachesize <size> Cache size in KiB (default: autodetect).
 	 # here I am setting to 64MiB to keep it minimal

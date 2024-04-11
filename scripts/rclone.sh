@@ -3,13 +3,14 @@
 
 # //////////////////////////////////////////////////////////////////////////
 function Install_rclone() {
-	curl https://rclone.org/install.sh | sudo bash
+	which rclone || curl https://rclone.org/install.sh | sudo bash
 	# check the version
 	rclone --version	
 }
 
 # //////////////////////////////////////////////////////////////////////////
 function Uninstall_rclone() {
+    sudo rm -f /usr/bin/rclone
 	rm -f ~/.config/rclone/rclone.conf
 }
 
@@ -40,7 +41,8 @@ EOF
         nsdf-test-rclone:${BUCKET_NAME} \
         ${TEST_DIR} \
 		  --daemon \
-        --cache-dir ${CACHE_DIR} 
+        --cache-dir ${CACHE_DIR} \
+        --vfs-fast-fingerprint
     
     CheckMount ${TEST_DIR}
     echo "FuseUp rclone done"

@@ -1,4 +1,4 @@
-#set -Eueo pipefail
+set -Eueo pipefail
 set -o errtrace # inherits trap on ERR in function and subshell
 
 trap 'traperror $? $LINENO $BASH_LINENO "$BASH_COMMAND" $(printf "::%s" ${FUNCNAME[@]:-})' ERR

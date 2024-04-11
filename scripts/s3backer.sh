@@ -11,7 +11,7 @@
 # //////////////////////////////////////////////////////////////////////////
 function Install_s3backer() {
 	sudo apt install -y s3backer
-	sudo sh -c 'echo user_allow_other >> /etc/fuse.conf'
+	grep -q '^user_allow_other' /etc/fuse.conf || sudo sh -c 'echo user_allow_other >> /etc/fuse.conf'
 	s3backer --version	# check the version
 }
 
@@ -46,6 +46,7 @@ function MountBackend() {
 			   --baseURL=${AWS_S3_ENDPOINT_URL}/  \
             ${BUCKET_NAME} \
             ${CACHE_DIR}/backend
+            --no-vhost
 
     CheckMount ${CACHE_DIR}/backend
     
