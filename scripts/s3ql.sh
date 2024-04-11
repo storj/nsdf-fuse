@@ -20,7 +20,7 @@ function Install_s3ql() {
 	wget https://github.com/s3ql/s3ql/releases/download/s3ql-5.1.3/s3ql-5.1.3.tar.gz
 
 	tar xzf s3ql-5.1.3.tar.gz
-	pushd s3ql-3.8.1
+	pushd s3ql-5.1.3
 	python3 setup.py build_ext --inplace
 	sudo python3 setup.py install 
 	popd

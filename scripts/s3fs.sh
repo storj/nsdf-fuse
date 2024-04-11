@@ -5,6 +5,7 @@
 
 # //////////////////////////////////////////////////////////////////////////
 function Install_s3fs() {
+	grep -q '^user_allow_other' /etc/fuse.conf || sudo sh -c 'echo user_allow_other >> /etc/fuse.conf'
     # NOTE: install from scratch, old version is buggy
 	sudo apt-get install -y autotools-dev automake libcurl4-openssl-dev libxml2-dev libssl-dev libfuse-dev fuse pkg-config
 	git clone https://github.com/s3fs-fuse/s3fs-fuse.git
@@ -54,7 +55,9 @@ function FuseUp() {
         -o parallel_count=30 \
         -o multireq_max=30 \
 		  -o use_cache=${CACHE_DIR} \
-		  -o del_cache
+		  -o del_cache \
+		-o use_path_request_style \
+		-o allow_other,uid=$UID,umask=0077,mp_umask=0077 # TODO:  clean up permissions
 
     CheckMount ${TEST_DIR}
     echo "FuseUp s3fs done"
